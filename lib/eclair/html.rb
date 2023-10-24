@@ -1,6 +1,7 @@
 # typed: strong
-require 'sorbet-runtime'
-require_relative './element'
+require "sorbet-runtime"
+
+require_relative "./element"
 
 module Eclair
   module Html
