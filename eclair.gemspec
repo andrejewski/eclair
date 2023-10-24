@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.license       = "MIT"
 
   s.required_ruby_version = ['>= 3.0']
-  s.add_dependency('sorbet-runtime')
+  s.add_dependency('sorbet-runtime', '~> 0.5', '>= 0.5.9204')
 end
