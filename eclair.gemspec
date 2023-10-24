@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = "eclair"
   s.version     = "0.0.0"
-  s.summary     = "React-like HTML building for Ruby"
+  s.summary     = "Declarative HTML building for Ruby"
   s.description = "The main entrypoint for using Eclair"
   s.authors     = ["Chris Andrejewski"]
   s.email       = "christopher.andrejewski@gmail.com"

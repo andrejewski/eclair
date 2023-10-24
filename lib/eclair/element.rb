@@ -13,11 +13,12 @@ module Eclair
     end
 
     AttributeValue = T.type_alias { T.any(T::Boolean, String) }
+    Attributes = T.type_alias { T::Hash[Symbol, AttributeValue] }
     ElementChild = T.type_alias { T.any(Element, String, DangerousUnescapedHtml) }
     Children = T.type_alias { T.any(T.class_of(Void), T::Array[ElementChild]) }
 
     const :tag, Symbol
-    const :attributes, T::Hash[Symbol, AttributeValue]
+    const :attributes, Attributes
     const :children, Children
   end
 end

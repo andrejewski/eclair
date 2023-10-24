@@ -1,0 +1,7 @@
+{
+  "sorbet.enabled": true,
+  "sorbet.highlightUntyped": true,
+  "[ruby]": {
+      "editor.formatOnSave": true
+  },
+}

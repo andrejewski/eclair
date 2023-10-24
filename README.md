@@ -1,30 +1,61 @@
-# eclair
-React-like HTML building for Ruby
-
-## Render simple HTML
+# Eclair
+> Declarative HTML building for Ruby
 
 ```rb
+require 'eclair'
+
 example = Eclair::Html.yield_self do |h|
-  h.div({}, ["Hello ", h.b({}, 'world'), "!"])
+  h.p({}, ["Hello ", h.b({}, 'world'), "!"])
 end
 
 html = Eclair.render(example)
+#=> "<p>Hello <b>world</b>!</p>"
 ```
 
-## Compose components
+Features:
+
+- Sorbet types (>= `typed: strict`)
+- HTML escaping by default
+- Composition-based API
+- Small API surface
+
+## Standard library
+
+The `Eclair::Html` module offers methods for building all standard HTML elements such as `p`, `span`, and `div`.
+
+Reach for `yield_self` to avoid boilerplate of calling `Eclair::HTML.<tag>` multiple times.
+
+## Custom tags
+
+Use `Eclair.element(tag, attributes, children)` to construct any HTML element. The `Eclair::Html` module uses this method.
 
 ```rb
-def external_link(href:, text:)
-  Eclair::Html.yield_self do |h|
-    h.a({href: href, target: '_blank'}, text)
-  end
-end
+example = Eclair.element('my-custom-element', {}, Eclair::Element::Void)
 
-html = Eclair.render(
-  external_link(
-    href: 'https://example.com',
-    text: 'Click here'
-  )
-)
+Eclair.render(example)
+#=> "<my-custom-element/>"
 ```
 
+## HTML escaping
+
+All text content and HTML attributes are escaped by default:
+
+```rb
+example = Eclair::Html.yield_self do |h|
+  h.p({}, ["<script>evil()</script>"])
+end
+
+Eclair.render(example)
+#=> "<p>&lt;script&gt;evil()&lt;/script&gt;</p>"
+```
+
+To circumvent this, reach for the appropriately scary `Eclair::Element::DangerousUnescapedHtml`:
+
+```rb
+example = Eclair::Html.yield_self do |h|
+  h.div({}, [Eclair::Element::DangerousUnescapedHtml.new(html: "<p>Hello</p>")])
+end
+
+html = Eclair.render(example)
+#=> "<div><p>Hello</p></div>"
+```

@@ -35,16 +35,17 @@ module Eclair
           next
         end
 
+        attr_name = escape_html(key.to_s)
         rendered_value = case value
         when TrueClass
-          next key.to_s
+          next attr_name
         when String
           escape_html(value)
         else
           T.absurd(value)
         end
 
-        "#{key}=\"#{rendered_value}\""
+        "#{attr_name}=\"#{rendered_value}\""
       end
       .compact
       .join(" ")
@@ -55,25 +56,21 @@ module Eclair
       "<#{element.tag} #{attributes}"
     end
 
-    rendered_children = case (c = element.children)
-    when Element::Void
-      return "#{start_tag_open}/>"
-    when Array
-      c.map do |child|
-        case child
-        when Element
-          render(child)
-        when Element::DangerousUnescapedHtml
-          child.html
-        when String
-          escape_html(child)
+    if (c = element.children) == Element::Void
+      return "#{start_tag_open}>"
+    end
 
-        else
-          T.absurd(child)
-        end
+    rendered_children = c.map do |child|
+      case child
+      when Element
+        render(child)
+      when Element::DangerousUnescapedHtml
+        child.html
+      when String
+        escape_html(child)
+      else
+        T.absurd(child)
       end
-    else
-      T.absurd(c)
     end
 
     "#{start_tag_open}>#{rendered_children.join}</#{element.tag}>"
