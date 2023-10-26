@@ -34,7 +34,7 @@ Reach for `yield_self` to avoid boilerplate of calling `Eclair::Html.<tag>` mult
 Use `Eclair.element(tag, attributes, children)` to construct any HTML element. The `Eclair::Html` module uses this method.
 
 ```rb
-example = Eclair.element('my-custom-element', {}, Eclair::Element::Void)
+example = Eclair.element(:'my-custom-element', {}, Eclair::Element::Void)
 
 Eclair.render(example)
 #=> "<my-custom-element/>"
