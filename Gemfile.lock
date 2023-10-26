@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     eclair (0.0.0)
-      sorbet-runtime
+      sorbet-runtime (~> 0.5, >= 0.5.9204)
 
 GEM
   remote: https://rubygems.org/
