@@ -1,6 +1,10 @@
 # Eclair
 > Declarative HTML building for Ruby
 
+```sh
+gem install eclair
+```
+
 ```rb
 require 'eclair'
 
@@ -23,7 +27,7 @@ Features:
 
 The `Eclair::Html` module offers methods for building all standard HTML elements such as `p`, `span`, and `div`.
 
-Reach for `yield_self` to avoid boilerplate of calling `Eclair::HTML.<tag>` multiple times.
+Reach for `yield_self` to avoid boilerplate of calling `Eclair::Html.<tag>` multiple times.
 
 ## Custom tags
 
@@ -59,3 +63,7 @@ end
 html = Eclair.render(example)
 #=> "<div><p>Hello</p></div>"
 ```
+
+---
+
+A special thank you to [Cyrus Vandrevala](https://github.com/cmvandrevala) for transferring me the `eclair` gem name.
